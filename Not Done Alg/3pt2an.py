@@ -44,10 +44,10 @@ def grady(x, y):
     return c
 
 def GD(x0, y0):
-    eta = 0.01
+    eta = 1e-4
     x = [x0]
     y = [y0]
-    for it in range(10000):
+    for it in range(1000):
         x_new = x[-1] - eta*gradx(x[-1], y[-1])
         y_new = y[-1] - eta*grady(x[-1], y[-1])
         if abs(gradx(x_new, y_new)) < 1e-3 and abs(grady(x_new, y_new)) > 1e-3:
