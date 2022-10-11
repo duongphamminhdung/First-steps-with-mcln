@@ -32,7 +32,7 @@ def gradx(x, y):
     for i in range(3):
         temp = coef[i]
         a = temp[0]; b = temp[1]; c = temp[2]
-        c += (-2*a*c+2*a*a*x+2*a*b*y)/6*math.sqrt(a*a+b*b)
+        c += (-2*a*c+2*a*a*x+2*a*b*y)
     return c
 
 def grady(x, y):
@@ -40,7 +40,7 @@ def grady(x, y):
     for i in range(3):
         temp = coef[i]
         a = temp[0]; b = temp[1]; c = temp[2]
-        c += (-2*b*c+2*b*b*y+2*a*b*x)/6*math.sqrt(a*a+b*b)
+        c += (-2*b*c+2*b*b*y+2*a*b*x)
     return c
 
 def GD(x0, y0):
