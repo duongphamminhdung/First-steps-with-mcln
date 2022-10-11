@@ -28,26 +28,26 @@ def kc(x, y):
     return c
 
 def gradx(x, y):
-    c = 0
+    cx = 0
     for i in range(3):
         temp = coef[i]
         a = temp[0]; b = temp[1]; c = temp[2]
-        c += (-2*a*c+2*a*a*x+2*a*b*y)
-    return c
+        cx += (-2*a*c+2*a*a*x+2*a*b*y)
+    return cx
 
 def grady(x, y):
-    c = 0
+    cy= 0
     for i in range(3):
         temp = coef[i]
         a = temp[0]; b = temp[1]; c = temp[2]
-        c += (-2*b*c+2*b*b*y+2*a*b*x)
-    return c
+        cy += (-2*b*c+2*b*b*y+2*a*b*x)
+    return cy
 
 def GD(x0, y0):
-    eta = 1e-4
+    eta = 1e-2
     x = [x0]
     y = [y0]
-    for it in range(1000):
+    for it in range(100000):
         x_new = x[-1] - eta*gradx(x[-1], y[-1])
         y_new = y[-1] - eta*grady(x[-1], y[-1])
         if abs(gradx(x_new, y_new)) < 1e-3 and abs(grady(x_new, y_new)) > 1e-3:
@@ -55,8 +55,6 @@ def GD(x0, y0):
         x.append(x_new)
         y.append(y_new)
     return (x, y)
-(x, y) = GD(1, 1)
-
-
+(x, y) = GD(1.926, 0.185)
 plt.scatter(x, y)
 plt.show()
