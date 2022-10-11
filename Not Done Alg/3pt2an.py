@@ -17,7 +17,7 @@ plt.scatter(X,Y)
 plt.grid()
 
 def calcE(point, coef):
-    e = abs(coef[0]*point[0] + coef[1]*point[1] + coef[2])
+    e = abs(-coef[0]*point[0] - coef[1]*point[1] + coef[2])
     return e**2
     
 def kc(x, y):
@@ -32,7 +32,7 @@ def gradx(x, y):
     for i in range(3):
         temp = coef[i]
         a = temp[0]; b = temp[1]; c = temp[2]
-        c += -2*a*c+2*a*a*x+2*a*b*y
+        c += (-2*a*c+2*a*a*x+2*a*b*y)/6*math.sqrt(a*a+b*b)
     return c
 
 def grady(x, y):
@@ -40,22 +40,23 @@ def grady(x, y):
     for i in range(3):
         temp = coef[i]
         a = temp[0]; b = temp[1]; c = temp[2]
-        c += -2*b*c+2*b*b*y+2*a*b*x
+        c += (-2*b*c+2*b*b*y+2*a*b*x)/6*math.sqrt(a*a+b*b)
     return c
 
 def GD(x0, y0):
     eta = 0.01
     x = [x0]
     y = [y0]
-    for it in range(1000):
+    for it in range(10000):
         x_new = x[-1] - eta*gradx(x[-1], y[-1])
         y_new = y[-1] - eta*grady(x[-1], y[-1])
-        if abs(gradx(x_new, y_new)) < 1e-3 and abs(grady(x_new, y_new)):
+        if abs(gradx(x_new, y_new)) < 1e-3 and abs(grady(x_new, y_new)) > 1e-3:
             break
         x.append(x_new)
         y.append(y_new)
-    return (x, y, it)
-(x, y, it) = GD(0, 0)
+    return (x, y)
+(x, y) = GD(1, 1)
+
 
 plt.scatter(x, y)
 plt.show()
