@@ -44,10 +44,10 @@ def grady(x, y):
     return cy
 
 def GD(x0, y0):
-    eta = 1e-2
+    eta = 0.01
     x = [x0]
     y = [y0]
-    for it in range(100000):
+    for it in range(20000):
         x_new = x[-1] - eta*gradx(x[-1], y[-1])
         y_new = y[-1] - eta*grady(x[-1], y[-1])
         if abs(gradx(x_new, y_new)) < 1e-3 and abs(grady(x_new, y_new)) > 1e-3:
@@ -55,6 +55,6 @@ def GD(x0, y0):
         x.append(x_new)
         y.append(y_new)
     return (x, y)
-(x, y) = GD(1.926, 0.185)
+(x, y) = GD(0, 0)
 plt.scatter(x, y)
 plt.show()

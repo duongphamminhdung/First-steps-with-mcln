@@ -11,7 +11,7 @@ def grada(alpha, beta):
         y = com_year[i]
         t = temp_deviation[i]
         c += (2*alpha*y*y + 2*y*(t-beta))
-    return c
+    return c/20
 
 def gradb(alpha, beta):
     c = 0
@@ -19,13 +19,13 @@ def gradb(alpha, beta):
         y = com_year[i]
         t = temp_deviation[i]
         c += (-2*t + 2*beta + 2*alpha*y)
-    return c
+    return c/20
 
 def GD1(alpha, beta):
     a = [alpha]
     b = [beta]
-    eta = 0.01
-    for i in range(10):
+    eta = 1e-6
+    for i in range(10000):
         alpha = alpha - eta*grada(a[-1], b[-1])
         beta = beta - eta*gradb(a[-1], b[-1])
         a.append(alpha)
@@ -35,7 +35,11 @@ def GD1(alpha, beta):
         
     return (a, b)
 plt.scatter(com_year, temp_deviation)
-(a, b) = GD1(0, 0)
-plt.plot(a[-1], b[-1])
+(a, b) = GD1(1/10, 0.3)
+print(a[-1], b[-1])
+x0 = np.random.randint(low=0, high=15, size=1000)
+y0 = a[-1]*x0 + b[-1]
+print(x0, y0)
 plt.grid()
+plt.plot(x0, y0)
 plt.show()
