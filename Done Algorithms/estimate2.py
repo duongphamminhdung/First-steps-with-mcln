@@ -30,7 +30,7 @@ def GD2(a, b, c):
     a0 = [a]
     b0 = [b]
     c0 = [c]
-    eta = 1e-6
+    eta = 1e-5
     for i in range(100000):
         a = a - eta*grada(a0[-1], b0[-1], c0[-1])
         b = b - eta*gradb(a0[-1], b0[-1], c0[-1])
@@ -43,8 +43,8 @@ def GD2(a, b, c):
         
     return (a0, b0, c0)
 
-(a0, b0, c0) = GD2(-0.001, 0.001, 0.2)
-x = 12*np.random.random_sample(size=10000)+1
+(a0, b0, c0) = GD2(0, 0, 0)
+x = 12*np.random.random_sample(size=100)+1
 y = a0[-1]*x*x + b0[-1]*x + c0[-1]
 print(x, y)
 print(a0[-1], b0[-1], c0[-1])
