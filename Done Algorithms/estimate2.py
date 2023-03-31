@@ -44,7 +44,7 @@ def GD2(a, b, c):
     return (a0, b0, c0)
 
 (a0, b0, c0) = GD2(0, 0, 0)
-x = 12*np.random.random_sample(size=100)+1
+x = 12*np.random.random_sample(size=1000)+1
 y = a0[-1]*x*x + b0[-1]*x + c0[-1]
 print(x, y)
 print(a0[-1], b0[-1], c0[-1])
